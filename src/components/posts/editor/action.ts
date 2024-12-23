@@ -7,7 +7,7 @@ import { createPostSchema } from "@/lib/validation";
 
 export async function submitPost(input: {
   content: string;
-  mediaIds: string[];
+  //mediaIds: string[];
 }) {
     const { user } = await validateRequest();
 
