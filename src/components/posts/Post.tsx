@@ -54,7 +54,7 @@ export default function Post({ post }: PostProps) {
                 className="block text-sm text-muted-foreground hover:underline"
                 suppressHydrationWarning
               >
-                {<>formatRelativeDate(post.createdAt)</>}
+                {formatRelativeDate(post.createdAt)}
               </Link>
             {/*</UserTooltip>*/}            
           </div>
