@@ -25,4 +25,3 @@ export function formatNumber(n: number): string {
   }).format(n);
 }
 
-
