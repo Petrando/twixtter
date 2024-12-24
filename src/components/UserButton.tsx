@@ -3,7 +3,7 @@
 import { logout } from "@/app/(auth)/actions";
 import { useSession } from "@/app/(main)/SessionProvider";
 import { cn } from "@/lib/utils";
-//import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { Check, LogOutIcon, Monitor, Moon, Sun, UserIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
@@ -30,7 +30,7 @@ export default function UserButton({ className }: UserButtonProps) {
 
     const { theme, setTheme } = useTheme();
 
-    //const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
     return (
         <DropdownMenu>
@@ -76,7 +76,7 @@ export default function UserButton({ className }: UserButtonProps) {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                     onClick={() => {
-                        //queryClient.clear();
+                        queryClient.clear();
                         logout();
                     }}
                 >
