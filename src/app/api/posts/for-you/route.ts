@@ -1,13 +1,13 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { postDataInclude, /*getPostDataInclude,  */ } from "@/lib/types";
-//import { NextRequest } from "next/server";
+import { postDataInclude, /*getPostDataInclude,  */ PostsPage } from "@/lib/types";
+import { NextRequest } from "next/server";
 
-export async function GET(/*req: NextRequest*/) {
+export async function GET(req: NextRequest) {
     try {
-        //const cursor = req.nextUrl.searchParams.get("cursor") || undefined;
+        const cursor = req.nextUrl.searchParams.get("cursor") || undefined;
 
-        //const pageSize = 10;
+        const pageSize = 10;
 
         const { user } = await validateRequest();
 
@@ -18,19 +18,18 @@ export async function GET(/*req: NextRequest*/) {
         const posts = await prisma.post.findMany({
             include: postDataInclude, //getPostDataInclude(user.id),
             orderBy: { createdAt: "desc" },
-            //take: pageSize + 1,
-            //cursor: cursor ? { id: cursor } : undefined,
+            take: pageSize + 1,
+            cursor: cursor ? { id: cursor } : undefined,
         });
+    
+        const nextCursor = posts.length > pageSize ? posts[pageSize].id : null;
 
-        console.log(posts)
-        //const nextCursor = posts.length > pageSize ? posts[pageSize].id : null;
-
-        /*const data: PostsPage = {
+        const data: PostsPage = {
             posts: posts.slice(0, pageSize),
             nextCursor,
-        };*/
+        };
 
-        return Response.json(posts);
+        return Response.json(data);
     } catch (error) {
         console.error(error);
         return Response.json({ error: "Internal server error" }, { status: 500 });
