@@ -6,6 +6,8 @@ import { PostData, PostsPage } from "@/lib/types";
 import PostsLoadingSkeleton from "@/components/posts/PostLoadingSkeleton";
 import Post from "@/components/posts/Post";
 import kyInstance from "@/lib/ky";
+import { Button } from "@/components/ui/button";
+import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
 
 export default function ForYouFeed() {
         
@@ -39,10 +41,13 @@ export default function ForYouFeed() {
     }
 
     return (
-        <div className="space-y-5">
+        <InfiniteScrollContainer
+            className="space-y-5"
+            onBottomReached={() => hasNextPage && !isFetching && fetchNextPage()}
+        >
         {posts.map((post) => (
             <Post key={post.id} post={post} />
         ))}
-        </div>
+        </InfiniteScrollContainer>
     )
 }
