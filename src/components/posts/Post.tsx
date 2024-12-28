@@ -21,16 +21,15 @@ import Linkify from "../Linkify";
 import UserTooltip from "../UserTooltip";
 import BookmarkButton from "./BookmarkButton";
 import LikeButton from "./LikeButton";
-import PostMoreButton from "./PostMoreButton";
-
 */
+import PostMoreButton from "./PostMoreButton";
 
 interface PostProps {
   post: PostData;
 }
 
 export default function Post({ post }: PostProps) {
-  //const { user } = useSession();
+  const { user } = useSession();
 
   //const [showComments, setShowComments] = useState(false);
 
@@ -58,7 +57,15 @@ export default function Post({ post }: PostProps) {
               </Link>
             {/*</UserTooltip>*/}            
           </div>
-        </div>        
+        </div>
+        {
+          post.user.id === user.id && (
+            <PostMoreButton 
+              post={post} 
+              className="opacity-0 transition-opacity group-hover/post:opacity-100" 
+            />
+          )
+        }        
       </div>
       <div className="whitespace-pre-line break-words">{post.content}</div>
     </article>

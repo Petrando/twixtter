@@ -1,3 +1,5 @@
+"use client"
+
 import { PostData } from "@/lib/types";
 import { MoreHorizontal, Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -32,7 +34,7 @@ export default function PostMoreButton({
             <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => setShowDeleteDialog(true)}>
                     <span className="flex items-center gap-3 text-destructive">
-                    <Trash2 className="size-4" />
+                        <Trash2 className="size-4" />
                         Delete
                     </span>
                 </DropdownMenuItem>
