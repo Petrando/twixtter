@@ -8,11 +8,12 @@ import Post from "@/components/posts/Post";
 import kyInstance from "@/lib/ky";
 import { Button } from "@/components/ui/button";
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
+import { Loader2 } from "lucide-react";
 
 export default function ForYouFeed() {
         
     const {
-        data, fetchNextPage, hasNextPage, isFetching, isFetchNextPageError, status
+        data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isFetchNextPageError, status
     } = useInfiniteQuery({
         queryKey: ["post-feed", "for-you"],
         queryFn: ({ pageParam }) =>
@@ -48,6 +49,7 @@ export default function ForYouFeed() {
         {posts.map((post) => (
             <Post key={post.id} post={post} />
         ))}
+        {isFetchingNextPage && <Loader2 className="mx-auto my-3 animate-spin" />}
         </InfiniteScrollContainer>
     )
 }
