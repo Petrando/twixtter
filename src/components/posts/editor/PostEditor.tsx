@@ -13,7 +13,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { ImageIcon, Loader2, X } from "lucide-react";
 import Image from "next/image";
 import { ClipboardEvent, useRef } from "react";
-//import { useSubmitPostMutation } from "./mutations";
+import { useSubmitPostMutation } from "./mutations";
 import "./styles.css";
 import { submitPost } from "./action";
 //import useMediaUpload, { Attachment } from "./useMediaUpload";
@@ -21,8 +21,9 @@ import { submitPost } from "./action";
 export default function PostEditor() {
   const { user } = useSession();
 
-  /*const mutation = useSubmitPostMutation();
+  const mutation = useSubmitPostMutation();
 
+  /*
   const {
     startUpload,
     attachments,
@@ -56,21 +57,19 @@ export default function PostEditor() {
         }) || "";
 
     async function onSubmit() {
-        submitPost({content: input})
-        editor?.commands.clearContent();
-        /*
+                
         mutation.mutate(
             {
                 content: input,
-                mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[],
+                //mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[],
             },
             {
                 onSuccess: () => {
-                editor?.commands.clearContent();
-                resetMediaUploads();
+                    editor?.commands.clearContent();
+                    //resetMediaUploads();
                 },
             },
-        );*/
+        );
     }
 
     /*
@@ -109,14 +108,7 @@ export default function PostEditor() {
             removeAttachment={removeAttachment}
             />
         )*/}
-        <div className="flex items-center justify-end gap-3">
-            <Button
-                onClick={onSubmit}
-                disabled={!input.trim()}
-                className="min-w-20"
-            >
-                Post
-            </Button>
+        <div className="flex items-center justify-end gap-3">            
             {/*isUploading && (
             <>
                 <span className="text-sm">{uploadProgress ?? 0}%</span>
@@ -127,16 +119,16 @@ export default function PostEditor() {
             <AddAttachmentsButton
             onFilesSelected={startUpload}
             disabled={isUploading || attachments.length >= 5}
-            />
+            />*/}
             <LoadingButton
-            onClick={onSubmit}
-            loading={mutation.isPending}
-            disabled={!input.trim() || isUploading}
-            className="min-w-20"
+                onClick={onSubmit}
+                loading={mutation.isPending}
+                disabled={!input.trim() /*|| isUploading*/}
+                className="min-w-20"
             >
-            Post
+                Post
             </LoadingButton>
-            */}
+            
         </div>
         </div>
   );

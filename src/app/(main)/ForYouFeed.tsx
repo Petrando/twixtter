@@ -6,7 +6,6 @@ import { PostData, PostsPage } from "@/lib/types";
 import PostsLoadingSkeleton from "@/components/posts/PostLoadingSkeleton";
 import Post from "@/components/posts/Post";
 import kyInstance from "@/lib/ky";
-import { Button } from "@/components/ui/button";
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
 import { Loader2 } from "lucide-react";
 
