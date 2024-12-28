@@ -33,6 +33,14 @@ export default function ForYouFeed() {
         return <PostsLoadingSkeleton />;    
     }
 
+    if (status === "success" && !posts.length && !hasNextPage) {
+        return (
+            <p className="text-center text-muted-foreground">
+                No one has posted anything yet.
+            </p>
+        );
+    }
+
     if (status === "error") {
         return (
             <p className="text-center text-destructive">
