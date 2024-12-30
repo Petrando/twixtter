@@ -23,7 +23,16 @@ export function useSubmitPostMutation() {
         onSuccess: async (newPost) => {
             const queryFilter:QueryFilters<InfiniteData<PostsPage, string | null>, Error, InfiniteData<PostsPage, string | null>, QueryKey> = 
                 { 
-                    queryKey: ["post-feed", "for-you"] 
+                    queryKey: ["post-feed"],
+                    predicate(query){
+                        return (
+                            query.queryKey.includes("for-you") ||
+                                (
+                                    query.queryKey.includes("user-posts") &&
+                                    query.queryKey.includes(user.id)
+                                )
+                        )
+                    }
                 }            
 
             await queryClient.cancelQueries(queryFilter);
