@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { validateRequest } from "@/auth";
 import FollowButton from "@/components/FollowButton";
 import FollowerCount from "@/components/FollowerCount";
@@ -35,6 +36,7 @@ const getUser = cache(async (username: string, loggedInUserId: string) => {
     return user;
 });
 
+/*
 export async function generateMetadata({
     params: { username },
 }: PageProps): Promise<Metadata> {
@@ -48,6 +50,7 @@ export async function generateMetadata({
         title: `${user.displayName} (@${user.username})`,
     };
 }
+*/
 
 export default async function Page({ params: { username } }: PageProps) {
     const { user: loggedInUser } = await validateRequest();
