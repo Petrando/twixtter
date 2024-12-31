@@ -1,11 +1,13 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
 import { FollowerInfo } from "@/lib/types";
+import { NextRequest } from "next/server";
 
 export async function GET(
-    req: Request,
-    { params: { userId } }: { params: { userId: string } },
+    req: NextRequest,
+    { params}: { params: Promise<{ userId: string }> },
 ) {
+    const { userId } = await params
     try {
         const { user: loggedInUser } = await validateRequest();
 
