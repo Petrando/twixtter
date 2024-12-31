@@ -14,11 +14,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 import UserAvatar from "../UserAvatar";
+import UserTooltip from "../UserTooltip";
 /*
 import Comments from "../comments/Comments";
 import Linkify from "../Linkify";
 
-import UserTooltip from "../UserTooltip";
+
 import BookmarkButton from "./BookmarkButton";
 import LikeButton from "./LikeButton";
 */
@@ -38,25 +39,27 @@ export default function Post({ post }: PostProps) {
     <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">        
       <div className="flex justify-between gap-3">
         <div className="flex flex-wrap gap-3">
-            <Link href={`/users/${post.user.username}`}>
-              <UserAvatar avatarUrl={post.user.avatarUrl} />
-            </Link>
-            <div>
-            {/*<UserTooltip user={post.user}>*/}
-              <Link
-                href={`/users/${post.user.username}`}
-                className="block font-medium hover:underline"
-              >
-                {post.user.displayName}
+            <UserTooltip user={post.user}>
+              <Link href={`/users/${post.user.username}`}>
+                <UserAvatar avatarUrl={post.user.avatarUrl} />
               </Link>
+            </UserTooltip>
+            <div>
+              <UserTooltip user={post.user}>
+                <Link
+                  href={`/users/${post.user.username}`}
+                  className="block font-medium hover:underline"
+                >
+                  {post.user.displayName}
+                </Link>
+              </UserTooltip>
               <Link
                 href={`/posts/${post.id}`}
                 className="block text-sm text-muted-foreground hover:underline"
                 suppressHydrationWarning
               >
                 {formatRelativeDate(post.createdAt)}
-              </Link>
-            {/*</UserTooltip>*/}            
+              </Link>         
           </div>
         </div>
         {
