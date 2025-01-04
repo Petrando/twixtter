@@ -7,7 +7,7 @@ import { UploadThingError } from "uploadthing/server";
 const f = createUploadthing();
 
 // FileRouter for your app, can contain multiple FileRoutes
-export const ourFileRouter = {
+export const fileRouter = {
     // Define as many FileRoutes as you like, each with a unique routeSlug
     imageUploader: f({
         image: {
@@ -16,7 +16,7 @@ export const ourFileRouter = {
              * @see https://docs.uploadthing.com/file-routes#route-config
              */
             maxFileSize: "512KB",//"4MB",
-            maxFileCount: 1,
+            //maxFileCount: 1,
         },
     })
         // Set permissions and file types for this FileRoute
@@ -49,4 +49,4 @@ export const ourFileRouter = {
         }),
 } satisfies FileRouter;
 
-export type OurFileRouter = typeof ourFileRouter;
+export type AppFileRouter = typeof fileRouter;

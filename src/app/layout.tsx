@@ -3,7 +3,7 @@ import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
-import { ourFileRouter } from "@/app/api/uploadthing/core";
+import { fileRouter } from "@/app/api/uploadthing/core";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import ReactQueryProvider from "./ReactQueryProvider";
@@ -43,7 +43,7 @@ export default function RootLayout({
            * leaked to the client. The data passed to the client is the same
            * as if you were to fetch `/api/uploadthing` directly.
            */
-          routerConfig={extractRouterConfig(ourFileRouter)}
+          routerConfig={extractRouterConfig(fileRouter)}
         />
         <ReactQueryProvider>
         <ThemeProvider
