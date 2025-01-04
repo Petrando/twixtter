@@ -15,6 +15,7 @@ import { formatNumber } from "@/lib/utils";
 //import EditProfileButton from "./EditProfileButton";
 import UserPosts from "./UserPosts";
 import { Button } from "@/components/ui/button";
+import EditProfileButton from "./EditProfileButton";
 
 interface Props {
     params: Promise<{ username: string }>;
@@ -121,7 +122,7 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
 
                 </div>
                 {user.id === loggedInUserId ? (
-                    <Button>Edit Profile</Button>
+                    <EditProfileButton user={user} />
                     ) : (
                     <FollowButton userId={user.id} initialState={followerInfo} />
                 )}
