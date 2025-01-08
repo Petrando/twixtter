@@ -17,7 +17,6 @@ import UserAvatar from "../UserAvatar";
 import UserTooltip from "../UserTooltip";
 /*
 import Comments from "../comments/Comments";
-import Linkify from "../Linkify";
 
 
 import BookmarkButton from "./BookmarkButton";
@@ -83,8 +82,6 @@ export default function Post({ post }: PostProps) {
     </article>
   );
 }
-
-
 
 interface MediaPreviewsProps {
   attachments: Media[];
