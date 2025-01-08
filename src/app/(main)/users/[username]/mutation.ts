@@ -29,7 +29,8 @@ export function useUpdateProfileMutation(){
                 avatar && startAvatarUpload([avatar]),
             ]);
         },
-        onSuccess: async ([updatedUser, uploadResult]) => {
+        onSuccess: async ([updatedUser, uploadResult]) => {            
+            
             const newAvatarUrl = uploadResult?.[0].serverData.avatarUrl;
       
             const queryFilter: QueryFilters<InfiniteData<PostsPage, string | null>, Error, InfiniteData<PostsPage, string | null>, QueryKey> = {

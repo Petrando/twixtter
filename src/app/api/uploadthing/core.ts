@@ -37,13 +37,13 @@ export const fileRouter = {
                 `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
               );
 
-            prisma.user.update({
+            await prisma.user.update({
                 where: { id: metadata.user.id },
                 data: {
                     avatarUrl: newAvatarUrl,
                 },
             })  
-
+            
             // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
             return { avatarUrl: newAvatarUrl };
         }),
