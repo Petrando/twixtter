@@ -35,28 +35,28 @@ export function getPostDataInclude(loggedInUserId: string) {
             select: getUserDataSelect(loggedInUserId),
         },
         attachments: true,
-        /*likes: {
+        likes: {
+            where: {
+                userId: loggedInUserId,
+            },
+            select: {
+                userId: true,
+            },
+        },
+        /*bookmarks: {
             where: {
             userId: loggedInUserId,
             },
             select: {
             userId: true,
-            },
-        },
-        bookmarks: {
-            where: {
-            userId: loggedInUserId,
-            },
-            select: {
-            userId: true,
-            },
-        },
-        _count: {
-            select: {
-            likes: true,
-            comments: true,
             },
         },*/
+        _count: {
+            select: {
+                likes: true,
+                //comments: true,
+            },
+        },
     } satisfies Prisma.PostInclude;
   }
 
