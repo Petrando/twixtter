@@ -72,7 +72,7 @@ export async function POST(
             return Response.json({ error: "Post not found" }, { status: 404 });
         }
 
-        prisma.like.upsert({
+        await prisma.like.upsert({
             where: {
                 userId_postId: {
                     userId: loggedInUser.id,
@@ -144,7 +144,7 @@ export async function DELETE(
             return Response.json({ error: "Post not found" }, { status: 404 });
         }
 
-        prisma.like.deleteMany({
+        await prisma.like.deleteMany({
             where: {
                 userId: loggedInUser.id,
                 postId,
