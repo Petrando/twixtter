@@ -32,9 +32,9 @@ export default function LikeButton({ postId, initialState }: LikeButtonProps) {
 
     const { mutate } = useMutation({
         mutationFn: () =>
-        data.isLikedByUser
-            ? kyInstance.delete(`/api/posts/${postId}/likes`)
-            : kyInstance.post(`/api/posts/${postId}/likes`),
+            data.isLikedByUser
+                ? kyInstance.delete(`/api/posts/${postId}/likes`)
+                : kyInstance.post(`/api/posts/${postId}/likes`),
         onMutate: async () => {
             await queryClient.cancelQueries({ queryKey });
 
