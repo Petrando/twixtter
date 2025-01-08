@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useUploadThing } from "@/lib/uploadthing";
 
-
 export interface Attachment {
     file: File;
     mediaId?: string;
@@ -37,7 +36,7 @@ export default function useMediaUpload(){
       
             return renamedFiles;
         },
-        onUploadProgress: setUploadProgress,
+        onUploadProgress: setUploadProgress,         
         onClientUploadComplete(res) {
             setAttachments((prev) =>
                 prev.map((a) => {

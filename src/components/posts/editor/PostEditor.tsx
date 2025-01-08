@@ -16,24 +16,24 @@ import { ClipboardEvent, useRef } from "react";
 import { useSubmitPostMutation } from "./mutations";
 import "./styles.css";
 import { submitPost } from "./action";
-//import useMediaUpload, { Attachment } from "./useMediaUpload";
+import useMediaUpload, { Attachment } from "./useMediaUpload";
 
 export default function PostEditor() {
   const { user } = useSession();
 
   const mutation = useSubmitPostMutation();
 
-  /*
-  const {
-    startUpload,
-    attachments,
-    isUploading,
-    uploadProgress,
-    removeAttachment,
-    reset: resetMediaUploads,
-  } = useMediaUpload();
+  
+    const {
+        startUpload,
+        attachments,
+        isUploading,
+        uploadProgress,
+        removeAttachment,
+        reset: resetMediaUploads,
+    } = useMediaUpload();
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    /*const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop: startUpload,
     });
 
@@ -61,12 +61,12 @@ export default function PostEditor() {
         mutation.mutate(
             {
                 content: input,
-                //mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[],
+                mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[],
             },
             {
                 onSuccess: () => {
                     editor?.commands.clearContent();
-                    //resetMediaUploads();
+                    resetMediaUploads();
                 },
             },
         );
@@ -102,28 +102,28 @@ export default function PostEditor() {
             <input {...getInputProps()} />
             </div>*/}
         </div>
-        {/*!!attachments.length && (
+        {!!attachments.length && (
             <AttachmentPreviews
-            attachments={attachments}
-            removeAttachment={removeAttachment}
+                attachments={attachments}
+                removeAttachment={removeAttachment}
             />
-        )*/}
+        )}
         <div className="flex items-center justify-end gap-3">            
-            {/*isUploading && (
-            <>
-                <span className="text-sm">{uploadProgress ?? 0}%</span>
-                <Loader2 className="size-5 animate-spin text-primary" />
-            </>
-            )*/}
-            {/*
+            {isUploading && (
+                <>
+                    <span className="text-sm">{uploadProgress ?? 0}%</span>
+                    <Loader2 className="size-5 animate-spin text-primary" />
+                </>
+            )}
+            
             <AddAttachmentsButton
-            onFilesSelected={startUpload}
-            disabled={isUploading || attachments.length >= 5}
-            />*/}
+                onFilesSelected={startUpload}
+                disabled={isUploading || attachments.length >= 5}
+            />
             <LoadingButton
                 onClick={onSubmit}
                 loading={mutation.isPending}
-                disabled={!input.trim() /*|| isUploading*/}
+                disabled={!input.trim() || isUploading}
                 className="min-w-20"
             >
                 Post
@@ -134,15 +134,15 @@ export default function PostEditor() {
   );
 }
 
-/*
+
 interface AddAttachmentsButtonProps {
     onFilesSelected: (files: File[]) => void;
     disabled: boolean;
 }
 
 function AddAttachmentsButton({
-  onFilesSelected,
-  disabled,
+    onFilesSelected,
+    disabled,
 }: AddAttachmentsButtonProps) {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -164,11 +164,11 @@ function AddAttachmentsButton({
             ref={fileInputRef}
             className="sr-only hidden"
             onChange={(e) => {
-            const files = Array.from(e.target.files || []);
-            if (files.length) {
-                onFilesSelected(files);
-                e.target.value = "";
-            }
+                const files = Array.from(e.target.files || []);
+                if (files.length) {
+                    onFilesSelected(files);
+                    e.target.value = "";
+                }
             }}
         />
         </>
@@ -186,16 +186,16 @@ function AttachmentPreviews({
 }: AttachmentPreviewsProps) {
     return (
         <div
-        className={cn(
-            "flex flex-col gap-3",
-            attachments.length > 1 && "sm:grid sm:grid-cols-2",
-        )}
+            className={cn(
+                "flex flex-col gap-3",
+                attachments.length > 1 && "sm:grid sm:grid-cols-2",
+            )}
         >
         {attachments.map((attachment) => (
             <AttachmentPreview
-            key={attachment.file.name}
-            attachment={attachment}
-            onRemoveClick={() => removeAttachment(attachment.file.name)}
+                key={attachment.file.name}
+                attachment={attachment}
+                onRemoveClick={() => removeAttachment(attachment.file.name)}
             />
         ))}
         </div>
@@ -208,38 +208,37 @@ interface AttachmentPreviewProps {
 }
 
 function AttachmentPreview({
-  attachment: { file, mediaId, isUploading },
-  onRemoveClick,
+    attachment: { file, mediaId, isUploading },
+    onRemoveClick,
 }: AttachmentPreviewProps) {
     const src = URL.createObjectURL(file);
 
     return (
         <div
-        className={cn("relative mx-auto size-fit", isUploading && "opacity-50")}
+            className={cn("relative mx-auto size-fit", isUploading && "opacity-50")}
         >
         {file.type.startsWith("image") ? (
             <Image
-            src={src}
-            alt="Attachment preview"
-            width={500}
-            height={500}
-            className="size-fit max-h-[30rem] rounded-2xl"
+                src={src}
+                alt="Attachment preview"
+                width={500}
+                height={500}
+                className="size-fit max-h-[30rem] rounded-2xl"
             />
         ) : (
             <video controls className="size-fit max-h-[30rem] rounded-2xl">
-            <source src={src} type={file.type} />
+                <source src={src} type={file.type} />
             </video>
         )}
         {!isUploading && (
             <button
-            onClick={onRemoveClick}
-            className="absolute right-3 top-3 rounded-full bg-foreground p-1.5 text-background transition-colors hover:bg-foreground/60"
+                onClick={onRemoveClick}
+                className="absolute right-3 top-3 rounded-full bg-foreground p-1.5 text-background transition-colors hover:bg-foreground/60"
             >
-            <X size={20} />
+                <X size={20} />
             </button>
         )}
         </div>
     );
 }
 
-*/

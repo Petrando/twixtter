@@ -25,6 +25,7 @@ import LikeButton from "./LikeButton";
 */
 import PostMoreButton from "./PostMoreButton";
 import Linkify from "../Linkify";
+import { Media } from "@prisma/client";
 
 interface PostProps {
   post: PostData;
@@ -76,11 +77,14 @@ export default function Post({ post }: PostProps) {
           {post.content}
         </div>
       </Linkify>
+      {!!post.attachments.length && (
+        <MediaPreviews attachments={post.attachments} />
+      )}
     </article>
   );
 }
 
-/*
+
 
 interface MediaPreviewsProps {
   attachments: Media[];
@@ -132,7 +136,7 @@ function MediaPreview({ media }: MediaPreviewProps) {
 
   return <p className="text-destructive">Unsupported media type</p>;
 }
-
+/*
 interface CommentButtonProps {
   post: PostData;
   onClick: () => void;
