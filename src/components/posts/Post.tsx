@@ -17,7 +17,6 @@ import UserAvatar from "../UserAvatar";
 import UserTooltip from "../UserTooltip";
 /*
 import Comments from "../comments/Comments";
-import BookmarkButton from "./BookmarkButton";
 */
 import PostMoreButton from "./PostMoreButton";
 import Linkify from "../Linkify";
@@ -32,7 +31,7 @@ interface PostProps {
 export default function Post({ post }: PostProps) {
   const { user } = useSession();
 
-  //const [showComments, setShowComments] = useState(false);
+  const [showComments, setShowComments] = useState(false);
 
   return (
     <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">        
@@ -80,13 +79,19 @@ export default function Post({ post }: PostProps) {
       )}
       <hr className="text-muted-foreground" />
       <div className="flex justify-between gap-5">
-        <LikeButton
-          postId={post.id}
-          initialState={{
-            likes: post._count.likes,
-            isLikedByUser: post.likes.some((like) => like.userId === user.id),
-          }}
-        />
+        <div className="flex justify-between gap-5">
+          <LikeButton
+            postId={post.id}
+            initialState={{
+              likes: post._count.likes,
+              isLikedByUser: post.likes.some((like) => like.userId === user.id),
+            }}
+          />
+          <CommentButton
+            post={post}
+            onClick={() => setShowComments(!showComments)}
+          />
+        </div>
         <BookmarkButton
             postId={post.id}
             initialState={{
@@ -150,7 +155,7 @@ function MediaPreview({ media }: MediaPreviewProps) {
 
   return <p className="text-destructive">Unsupported media type</p>;
 }
-/*
+
 interface CommentButtonProps {
   post: PostData;
   onClick: () => void;
@@ -167,5 +172,3 @@ function CommentButton({ post, onClick }: CommentButtonProps) {
     </button>
   );
 }
-
-*/
