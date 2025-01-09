@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import UserAvatar from "@/components/UserAvatar";
 import { NotificationData } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -12,7 +13,7 @@ interface NotificationProps {
 export default function Notification({ notification }: NotificationProps) {
     const notificationTypeMap: Record<
             NotificationType,
-        { message: string; icon: JSX.Element; href: string }
+        { message: string; icon: ReactNode; href: string }
     > = {
         FOLLOW: {
             message: `${notification.issuer.displayName} followed you`,
