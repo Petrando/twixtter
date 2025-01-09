@@ -71,21 +71,7 @@ export async function POST(
         if (!post) {
             return Response.json({ error: "Post not found" }, { status: 404 });
         }
-
-        await prisma.like.upsert({
-            where: {
-                userId_postId: {
-                    userId: loggedInUser.id,
-                    postId,
-                },
-            },
-            create: {
-                userId: loggedInUser.id,
-                postId,
-            },
-            update: {},
-        })
-        /*
+        
         await prisma.$transaction([
             prisma.like.upsert({
                 where: {
@@ -113,7 +99,7 @@ export async function POST(
                 ]
                 : []),
         ]);
-        */
+        
         return new Response();
     } catch (error) {
         console.error(error);
@@ -143,14 +129,7 @@ export async function DELETE(
         if (!post) {
             return Response.json({ error: "Post not found" }, { status: 404 });
         }
-
-        await prisma.like.deleteMany({
-            where: {
-                userId: loggedInUser.id,
-                postId,
-            },
-        })
-        /*
+        
         await prisma.$transaction([
             prisma.like.deleteMany({
                 where: {
@@ -167,7 +146,7 @@ export async function DELETE(
                 },
             }),
         ]);
-        */
+        
         return new Response();
     } catch (error) {
         console.error(error);
