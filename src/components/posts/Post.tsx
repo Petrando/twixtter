@@ -8,21 +8,17 @@ import {
     cn,    
     formatRelativeDate 
 } from "@/lib/utils";
-//import { Media } from "@prisma/client";
+import { Media } from "@prisma/client";
 import { MessageSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
 import UserAvatar from "../UserAvatar";
 import UserTooltip from "../UserTooltip";
-/*
-import Comments from "../comments/Comments";
-*/
 import PostMoreButton from "./PostMoreButton";
 import Linkify from "../Linkify";
 import LikeButton from "./LikeButton";
-import { Media } from "@prisma/client";
 import BookmarkButton from "./BookmarkButton";
+import Comments from "../comments/Comments";
 
 interface PostProps {
   post: PostData;
@@ -101,6 +97,7 @@ export default function Post({ post }: PostProps) {
             }}
         />
       </div>
+      {showComments && <Comments post={post} />}
     </article>
   );
 }
