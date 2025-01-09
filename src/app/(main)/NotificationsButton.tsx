@@ -24,6 +24,7 @@ export default function NotificationsButton({
         refetchInterval: 60 * 1000,
     });
 
+    console.log(data)
     return (
         <Button
             variant="ghost"
