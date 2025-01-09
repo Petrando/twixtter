@@ -77,13 +77,13 @@ export async function POST(
                 },
                 update: {},
             }),
-            /*prisma.notification.create({
+            prisma.notification.create({
                 data: {
                     issuerId: loggedInUser.id,
                     recipientId: userId,
                     type: "FOLLOW",
                 },
-            }),*/
+            }),
         ]);
 
         return new Response();
