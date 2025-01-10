@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
+import streamServerClient from "@/lib/stream";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError, UTApi } from "uploadthing/server";
 
@@ -47,12 +48,20 @@ export const fileRouter = {
                 `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
               );
 
-            await prisma.user.update({
-                where: { id: metadata.user.id },
-                data: {
-                    avatarUrl: newAvatarUrl,
-                },
-            })  
+            await Promise.all([
+                prisma.user.update({
+                    where: { id: metadata.user.id },
+                    data: {
+                        avatarUrl: newAvatarUrl,
+                    },
+                }),
+                streamServerClient.partialUpdateUser({
+                    id: metadata.user.id,
+                    set: {
+                        image: newAvatarUrl,
+                    },
+                }),
+            ]);
             
             // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
             return { avatarUrl: newAvatarUrl };
