@@ -33,8 +33,14 @@ export default function Chat() {
                             : "str-chat__theme-light"
                         }
                     >
-                        <ChatSidebar />
-                        <ChatChannel />
+                        <ChatSidebar 
+                            open={sidebarOpen}
+                            onClose={() => setSidebarOpen(false)}
+                        />
+                        <ChatChannel 
+                            open={!sidebarOpen}
+                            openSidebar={() => setSidebarOpen(true)}
+                        />
                     </StreamChat>
                 }
                 
