@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
-  ChannelList
+  ChannelList,
+  ChannelPreviewMessenger,
+  ChannelPreviewUIComponentProps
 } from "stream-chat-react";
 import { MailPlus, X } from "lucide-react";
 import { useSession } from "../SessionProvider";
@@ -16,7 +18,18 @@ interface ChatSidebarProps {
 export default function ChatSidebar({ open, onClose }: ChatSidebarProps) {
     const { user } = useSession();
 
-    console.log('chat sidebar : ', open)
+    const ChannelPreviewCustom = useCallback(
+        (props: ChannelPreviewUIComponentProps) => (
+            <ChannelPreviewMessenger
+                {...props}
+                onSelect={() => {
+                    props.setActiveChannel?.(props.channel, props.watchers);
+                    onClose();
+                }}
+            />
+        ),
+        [onClose],
+    );
 
     return (
         <div
@@ -42,6 +55,7 @@ export default function ChatSidebar({ open, onClose }: ChatSidebarProps) {
                         },
                     },
                 }}
+                Preview={ChannelPreviewCustom}
             />
         </div>
     );
