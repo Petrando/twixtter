@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { cn } from "@/lib/utils";
 import {
     Channel,
@@ -7,10 +8,9 @@ import {
     Window,
 } from "stream-chat-react";
 
-
 export default function ChatChannel() {
     return (
-        <div className={cn("w-full md:block", !open && "hidden")}>
+        <div className="w-full">
             <Channel>
                 <Window>
                     <ChannelHeader />

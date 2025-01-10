@@ -34,7 +34,7 @@ export default function useInitializeChatClient() {
                 .catch((error) => console.error("Failed to disconnect user", error))
                 .then(() => console.log("Connection closed"));
         };
-    }, [user.id, user.username, user.displayName, user.avatarUrl]);
+    }, [user.id, user.username, user.displayName, user.avatarUrl]);    
 
     return chatClient;
 }

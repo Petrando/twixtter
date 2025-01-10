@@ -22,20 +22,24 @@ export default function Chat() {
 
     return (
         <main className="relative w-full overflow-hidden rounded-2xl bg-card shadow-sm">
-        <div className="absolute bottom-0 top-0 flex w-full">
-            <StreamChat
-                client={chatClient}
-                theme={
-                    resolvedTheme === "dark"
-                    ? "str-chat__theme-dark"
-                    : "str-chat__theme-light"
+            <div className="absolute bottom-0 top-0 flex w-full">
+                {
+                    chatClient &&
+                    <StreamChat
+                        client={chatClient}
+                        theme={
+                            resolvedTheme === "dark"
+                            ? "str-chat__theme-dark"
+                            : "str-chat__theme-light"
+                        }
+                    >
+                        <ChatSidebar />
+                        <ChatChannel />
+                    </StreamChat>
                 }
-            >
-                <ChatSidebar />
-                <ChatChannel />
-            </StreamChat>
-            
-        </div>
+                
+                
+            </div>
         </main>
     );
 }
