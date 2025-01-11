@@ -16,7 +16,15 @@ const nextConfig: NextConfig = {
         pathname: `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/*`,
       },
     ],
-  }
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/hashtag/:tag",
+        destination: "/search?q=%23:tag",
+      },
+    ]
+  },
 };
 
 export default nextConfig;
