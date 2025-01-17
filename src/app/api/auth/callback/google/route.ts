@@ -31,10 +31,11 @@ export async function GET(req: NextRequest) {
             storedCodeVerifier,
         );
 
+        const accessToken = tokens.accessToken()
         const googleUser = await kyInstance
             .get("https://www.googleapis.com/oauth2/v1/userinfo", {
                 headers: {
-                    Authorization: `Bearer ${tokens.accessToken}`,
+                    Authorization: `Bearer ${accessToken}`,
                 },
             })
         .json<{ id: string; name: string }>();
