@@ -7,6 +7,7 @@ import { Bookmark, Home } from "lucide-react";
 import Link from "next/link";
 import MessagesButton from "./MessagesButton";
 import NotificationsButton from "./NotificationsButton";
+import AppInfoButton from "./AppInfoButton";
 
 interface MenuBarProps {
   className?: string;
@@ -54,6 +55,7 @@ export default async function MenuBar({ className }: MenuBarProps) {
                 <span className="hidden lg:inline">Bookmarks</span>
                 </Link>
             </Button>
+            <AppInfoButton />
         </div>
     );
 }
