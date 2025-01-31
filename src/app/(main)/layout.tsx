@@ -1,7 +1,7 @@
 import { validateRequest } from "@/auth";
 import { redirect } from "next/navigation";
-import MenuBar from "./MenuBar";
-import Navbar from "./Navbar";
+import MenuBar from "@/components/(main)/layout/MenuBar";
+import Navbar from "@/components/(main)/layout/Navbar";
 import SessionProvider from "./SessionProvider";
 
 export default async function Layout({
