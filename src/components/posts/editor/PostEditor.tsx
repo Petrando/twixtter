@@ -15,7 +15,6 @@ import Image from "next/image";
 import { ClipboardEvent, useRef } from "react";
 import { useSubmitPostMutation } from "./mutations";
 import "./styles.css";
-import { submitPost } from "./action";
 import useMediaUpload, { Attachment } from "./useMediaUpload";
 
 export default function PostEditor() {
@@ -45,7 +44,7 @@ export default function PostEditor() {
                 italic: false,
             }),
             Placeholder.configure({
-                placeholder: "What's crack-a-lackin'?",
+                placeholder: "What are you thinkin'?",
             }),
         ],
     });
